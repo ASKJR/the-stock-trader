@@ -1,10 +1,10 @@
 <template>
   <div class="col-md-6">
-    <div class="panel panel-success">
+    <div class="panel" :class="panelClass">
       <div class="panel-heading">
         <div class="panel-title">
           <b>{{ stock.company }}</b>
-          <small>(Price: {{stock.price}})</small>
+          <small>{{ panelSubTitle }}</small>
         </div>
       </div>
       <div class="panel-body">
@@ -15,8 +15,8 @@
             </div>
           </div>
           <div class="col-xs-8">
-            <button class="btn btn-success pull-right">
-              <strong>Buy</strong>
+            <button class="btn pull-right" :class="btnClass">
+              <strong>{{ btnTxt }}</strong>
             </button>
           </div>
         </div>
@@ -27,7 +27,29 @@
 
 <script>
 export default {
-  props: ["stock"]
+  props: ["stock", "type"],
+  computed: {
+    panelSubTitle() {
+      return this.type == "buy"
+        ? `(Price: ${this.stock.price})`
+        : `(Price: ${this.stock.price} | Quantity: ${this.stock.quantity})`;
+    },
+    panelClass() {
+      return {
+        "panel-success": this.type == "buy",
+        "panel-info": this.type == "sell"
+      };
+    },
+    btnClass() {
+      return {
+        "btn-success": this.type == "buy",
+        "btn-danger": this.type == "sell"
+      };
+    },
+    btnTxt() {
+      return this.type == "buy" ? "Buy" : "Sell";
+    }
+  }
 };
 </script>
 
