@@ -3,9 +3,7 @@
     <br />
     <br />
     <app-header></app-header>
-    <!-- <app-home></app-home> -->
-    <!-- <app-stocks></app-stocks> -->
-    <app-portfolio></app-portfolio>
+    <router-view></router-view>
   </div>
 </template>
 

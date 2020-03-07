@@ -15,21 +15,18 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">Stock Trader</a>
+        <router-link tag="a" active-class="navbar-brand" to="/">Stock Trader</router-link>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-          <li class="active">
-            <a href="#">
-              Portifolio
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          <li>
+          <router-link to="/portfolio" tag="li" active-class="active" exact>
+            <a href="#">Portfolio</a>
+          </router-link>
+          <router-link to="/stocks" tag="li" active-class="active" exact>
             <a href="#">Stocks</a>
-          </li>
+          </router-link>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li>
