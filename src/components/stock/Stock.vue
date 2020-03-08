@@ -11,11 +11,11 @@
         <div class="row">
           <div class="col-xs-4">
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="Quantity" />
+              <input type="number" class="form-control" placeholder="Quantity" v-model="qty" />
             </div>
           </div>
           <div class="col-xs-8">
-            <button class="btn pull-right" :class="btnClass">
+            <button class="btn pull-right" :class="btnClass" @click="addToPortfolio(stock)">
               <strong>{{ btnTxt }}</strong>
             </button>
           </div>
@@ -26,13 +26,19 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
+  data() {
+    return {
+      qty: ""
+    };
+  },
   props: ["stock", "type"],
   computed: {
     panelSubTitle() {
       return this.type == "buy"
         ? `(Price: ${this.stock.price})`
-        : `(Price: ${this.stock.price} | Quantity: ${this.stock.quantity})`;
+        : `(Price: ${this.stock.price} | Quantity: ${this.stock.qty})`;
     },
     panelClass() {
       return {
@@ -48,6 +54,14 @@ export default {
     },
     btnTxt() {
       return this.type == "buy" ? "Buy" : "Sell";
+    }
+  },
+  methods: {
+    ...mapActions(["addStock"]),
+    addToPortfolio(stock) {
+      stock.qty += parseInt(this.qty);
+      this.addStock(stock);
+      this.qty = "";
     }
   }
 };

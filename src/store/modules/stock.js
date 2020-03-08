@@ -3,15 +3,15 @@ import { numberToMoney } from '../../helper/money'
 const state = {
     
     stocks: [
-        { id: 1, company: "BMW", price: 110 },
+        { id: 1, company: "BMW", price: 110, qty: 0 },
 
-        { id: 2, company: "Google", price: 200 },
+        { id: 2, company: "Google", price: 200, qty: 0 },
 
-        { id: 3, company: "Apple", price: 250 },
+        { id: 3, company: "Apple", price: 250, qty: 0 },
 
-        { id: 4, company: "Twitter", price: 8 },
+        { id: 4, company: "Twitter", price: 8, qty:0 },
 
-        {id: 5, company: "Facebook", price: 500}
+        {id: 5, company: "Facebook", price: 500, qty:0 }
     ]
 }
 
