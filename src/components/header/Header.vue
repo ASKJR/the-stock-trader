@@ -30,7 +30,7 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li>
-            <a href="#">End Day</a>
+            <a href="#" @click="endDay">End Day</a>
           </li>
           <li class="dropdown">
             <a
@@ -66,12 +66,15 @@
   </nav>
 </template>
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 export default {
   computed: {
     ...mapGetters({
       funds: "totalAvailableFunds"
     })
+  },
+  methods: {
+    ...mapActions(["endDay"])
   }
 };
 </script>
