@@ -55,7 +55,7 @@
           </li>
           <li>
             <a href="#" style="pointer-events: none;cursor: default;">
-              <strong>Funds: $10.000</strong>
+              <strong>Funds: {{ funds }}</strong>
             </a>
           </li>
         </ul>
@@ -66,7 +66,14 @@
   </nav>
 </template>
 <script>
-export default {};
+import { mapGetters } from "vuex";
+export default {
+  computed: {
+    ...mapGetters({
+      funds: "totalAvailableFunds"
+    })
+  }
+};
 </script>
 
 <style>

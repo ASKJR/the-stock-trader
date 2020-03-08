@@ -8,14 +8,21 @@
       <p>Click on 'End Day' to begin a new Day!</p>
       <hr />
       <h4>
-        <b>Your Funds: $10.000</b>
+        <b>Your Funds: {{ funds }}</b>
       </h4>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+import { mapGetters } from "vuex";
+export default {
+  computed: {
+    ...mapGetters({
+      funds: "totalAvailableFunds"
+    })
+  }
+};
 </script>
 
 <style>
