@@ -9,7 +9,7 @@ const getters = {
 }
 
 const mutations = {
-    addStock: (state, payload) => {
+    buyStock: (state, payload) => {
         
         let stockIndex = state.portfolio.findIndex(s => s.id == payload.id); 
         
@@ -20,8 +20,8 @@ const mutations = {
 }
 
 const actions = {
-    addStock: ( { commit }, payload ) => {
-        commit('addStock', payload);
+    buyStock: ( { commit }, payload ) => {
+        commit('buyStock', payload);
     } 
 }
 

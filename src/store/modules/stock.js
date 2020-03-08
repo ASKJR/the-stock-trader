@@ -22,7 +22,7 @@ const getters = {
 const mutations = {
     endDay: (state) => {
         state.stocks.map(stock => {
-            stock.price = (Math.random() * (1000.99 - 1.00)) + 1.00;
+            stock.price = ((Math.random() * (1000.99 - 1.00)) + 1.00).toFixed(2);
             return stock;
         })
     }

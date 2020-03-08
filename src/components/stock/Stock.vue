@@ -16,7 +16,12 @@
             </div>
           </div>
           <div class="col-xs-8">
-            <button class="btn pull-right" :class="btnClass" @click="addToPortfolio(stock)">
+            <button
+              class="btn pull-right"
+              :class="btnClass"
+              @click="addToPortfolio(stock)"
+              :disabled="!qty"
+            >
               <strong>{{ btnTxt }}</strong>
             </button>
           </div>
@@ -27,7 +32,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 export default {
   data() {
     return {
@@ -36,6 +41,7 @@ export default {
   },
   props: ["stock", "type"],
   computed: {
+    ...mapGetters(["totalAvailableFunds"]),
     panelClass() {
       return {
         "panel-success": this.type == "buy",
@@ -53,11 +59,18 @@ export default {
     }
   },
   methods: {
-    ...mapActions(["addStock"]),
+    ...mapActions(["buyStock", "decrementFunds"]),
     addToPortfolio(stock) {
-      stock.qty += parseInt(this.qty);
-      this.addStock(stock);
-      this.qty = "";
+      let totalCharges = stock.price * this.qty;
+      if (this.totalAvailableFunds - totalCharges < 0) {
+        alert("You do not have enough money to perform this action.");
+        this.qty = "";
+      } else {
+        stock.qty += parseInt(this.qty);
+        this.buyStock(stock);
+        this.decrementFunds(totalCharges);
+        this.qty = "";
+      }
     }
   }
 };
