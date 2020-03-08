@@ -1,12 +1,10 @@
-import { numberToMoney } from '../../helper/money'
-
 const state = {
     fund: 12599.99
 }
 
 const getters = {
     totalAvailableFunds: state => {
-        return numberToMoney(state.fund)
+        return state.fund
     }
 }
 

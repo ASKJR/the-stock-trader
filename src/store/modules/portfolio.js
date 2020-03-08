@@ -1,4 +1,3 @@
-import { numberToMoney } from '../../helper/money'
 const state = {
     portfolio: []
 }

@@ -8,13 +8,14 @@
       <p>Click on 'End Day' to begin a new Day!</p>
       <hr />
       <h4>
-        <b>Your Funds: {{ funds }}</b>
+        <b>Your Funds: {{ funds | money }}</b>
       </h4>
     </div>
   </div>
 </template>
 
 <script>
+import { numberToMoney } from "../helper/money";
 import { mapGetters } from "vuex";
 export default {
   computed: {

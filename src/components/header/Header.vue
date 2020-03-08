@@ -55,7 +55,7 @@
           </li>
           <li>
             <a href="#" style="pointer-events: none;cursor: default;">
-              <strong>Funds: {{ funds }}</strong>
+              <strong>Funds: {{ funds | money }}</strong>
             </a>
           </li>
         </ul>

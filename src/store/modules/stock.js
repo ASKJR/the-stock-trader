@@ -1,5 +1,3 @@
-import { numberToMoney } from '../../helper/money'
-
 const state = {
     
     stocks: [
@@ -17,10 +15,7 @@ const state = {
 
 const getters = {
     stocks: (state) => {
-        return (state.stocks).map(stock => {
-            stock.price = numberToMoney(stock.price);
-            return stock;
-        });
+        return state.stocks;
     }
 }
 

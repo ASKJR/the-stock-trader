@@ -4,7 +4,8 @@
       <div class="panel-heading">
         <div class="panel-title">
           <b>{{ stock.company }}</b>
-          <small>{{ panelSubTitle }}</small>
+          <small v-if="type == 'buy'">(Price: {{ stock.price | money }})</small>
+          <small v-else>(Price: {{ stock.price | money }} | Quantity: {{ stock.qty }})</small>
         </div>
       </div>
       <div class="panel-body">
@@ -35,11 +36,6 @@ export default {
   },
   props: ["stock", "type"],
   computed: {
-    panelSubTitle() {
-      return this.type == "buy"
-        ? `(Price: ${this.stock.price})`
-        : `(Price: ${this.stock.price} | Quantity: ${this.stock.qty})`;
-    },
     panelClass() {
       return {
         "panel-success": this.type == "buy",
