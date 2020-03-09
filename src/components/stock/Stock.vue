@@ -61,6 +61,11 @@ export default {
       "incrementFunds"
     ]),
     stockActions() {
+      if (this.qty <= 0) {
+        alert("Invalid number for Quantity.");
+        this.qty = "";
+        return;
+      }
       if (this.type == "buy") {
         this.buy(this.stock);
       } else {
