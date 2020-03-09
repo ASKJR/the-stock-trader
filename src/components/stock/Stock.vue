@@ -16,12 +16,7 @@
             </div>
           </div>
           <div class="col-xs-8">
-            <button
-              class="btn pull-right"
-              :class="btnClass"
-              @click="addToPortfolio(stock)"
-              :disabled="!qty"
-            >
+            <button class="btn pull-right" :class="btnClass" @click="stockActions" :disabled="!qty">
               <strong>{{ btnTxt }}</strong>
             </button>
           </div>
@@ -59,8 +54,20 @@ export default {
     }
   },
   methods: {
-    ...mapActions(["buyStock", "decrementFunds"]),
-    addToPortfolio(stock) {
+    ...mapActions([
+      "buyStock",
+      "sellStock",
+      "decrementFunds",
+      "incrementFunds"
+    ]),
+    stockActions() {
+      if (this.type == "buy") {
+        this.buy(this.stock);
+      } else {
+        this.sell(this.stock);
+      }
+    },
+    buy(stock) {
       let totalCharges = stock.price * this.qty;
       if (this.totalAvailableFunds - totalCharges < 0) {
         alert("You do not have enough money to perform this action.");
@@ -69,6 +76,17 @@ export default {
         stock.qty += parseInt(this.qty);
         this.buyStock(stock);
         this.decrementFunds(totalCharges);
+        this.qty = "";
+      }
+    },
+    sell(stock) {
+      if (this.qty > stock.qty) {
+        alert("You cannot sell more stocks than you have available.");
+        this.qty = "";
+      } else {
+        stock.qty -= parseInt(this.qty);
+        this.sellStock(stock);
+        this.incrementFunds(stock.price * this.qty);
         this.qty = "";
       }
     }
