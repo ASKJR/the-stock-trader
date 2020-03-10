@@ -14,7 +14,10 @@ const mutations = {
     },
     decrementFunds: (state, payload) => {
         state.fund -= payload;
-    } 
+    },
+    loadFunds: (state, payload) => {
+        state.fund = payload;
+    }
 }
 
 const actions = {
@@ -23,6 +26,9 @@ const actions = {
     },
     decrementFunds: ({ commit }, payload) => {
         commit('decrementFunds', payload);
+    },
+    loadFunds: ({ commit }, payload) => {
+        commit('loadFunds', payload);
     }
 }
 

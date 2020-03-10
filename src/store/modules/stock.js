@@ -24,13 +24,20 @@ const mutations = {
         state.stocks.map(stock => {
             stock.price = ((Math.random() * (1000.99 - 1.00)) + 1.00).toFixed(2);
             return stock;
-        })
+        });
+    },
+    loadStocks: (state, payload) => {
+        state.stocks = payload;
     }
+
 }
 
 const actions = {
     endDay: ({ commit }) => {
         commit('endDay');
+    },
+    loadStocks: ({ commit }, payload) => {
+        commit('loadStocks', payload);
     }
 }
 

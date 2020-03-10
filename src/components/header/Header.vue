@@ -46,16 +46,16 @@
             </a>
             <ul class="dropdown-menu">
               <li>
-                <a href="#">Save Data</a>
+                <a href="#" @click="saveState">Save Data</a>
               </li>
               <li>
-                <a href="#">Load Data</a>
+                <a href="#" @click="loadState">Load Data</a>
               </li>
             </ul>
           </li>
           <li>
             <a href="#" style="pointer-events: none;cursor: default;">
-              <strong>Funds: {{ funds | money }}</strong>
+              <strong>Funds: {{ totalAvailableFunds | money }}</strong>
             </a>
           </li>
         </ul>
@@ -67,14 +67,39 @@
 </template>
 <script>
 import { mapGetters, mapActions } from "vuex";
+import axios from "axios";
 export default {
   computed: {
-    ...mapGetters({
-      funds: "totalAvailableFunds"
-    })
+    ...mapGetters(["totalAvailableFunds", "myStocks", "stocks"])
   },
   methods: {
-    ...mapActions(["endDay"])
+    ...mapActions(["endDay", "loadFunds", "loadStocks", "loadPortfolio"]),
+    saveState() {
+      axios
+        .put("https://the-stock-trader-5e936.firebaseio.com/data.json", {
+          stocks: this.stocks,
+          portfolio: this.myStocks,
+          funds: this.totalAvailableFunds
+        })
+        .then(response => {})
+        .catch(e => {
+          console.log(e);
+        });
+    },
+    loadState() {
+      axios
+        .get("https://the-stock-trader-5e936.firebaseio.com/data.json")
+        .then(response => {
+          let { funds, portfolio, stocks } = response.data;
+          this.loadFunds(funds);
+          this.loadStocks(stocks);
+          portfolio = portfolio ? portfolio : [];
+          this.loadPortfolio({ portfolio, stocks });
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    }
   }
 };
 </script>
