@@ -16,7 +16,12 @@
             </div>
           </div>
           <div class="col-xs-8">
-            <button class="btn pull-right" :class="btnClass" @click="stockActions" :disabled="!qty">
+            <button
+              class="btn pull-right"
+              :class="btnClass"
+              @click="stockActions"
+              :disabled="!qty || !Number.isInteger(Number(qty)) || qty <= 0"
+            >
               <strong>{{ btnTxt }}</strong>
             </button>
           </div>
@@ -61,11 +66,6 @@ export default {
       "incrementFunds"
     ]),
     stockActions() {
-      if (this.qty <= 0) {
-        alert("Invalid number for Quantity.");
-        this.qty = "";
-        return;
-      }
       if (this.type == "buy") {
         this.buy(this.stock);
       } else {
