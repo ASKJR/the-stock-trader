@@ -1,7 +1,5 @@
 <template>
   <div class="container">
-    <br />
-    <br />
     <app-header></app-header>
     <transition name="slide" mode="out-in">
       <router-view></router-view>
@@ -16,15 +14,15 @@ import Stocks from "./components/stock/Stocks.vue";
 import Portfolio from "./components/portfolio/Portfolio.vue";
 export default {
   components: {
-    appHeader: Header,
-    appHome: Home,
-    appStocks: Stocks,
-    appPortfolio: Portfolio
+    appHeader: Header
   }
 };
 </script>
 
 <style>
+body {
+  padding: 30px;
+}
 .slide-enter {
   opacity: 0;
 }
